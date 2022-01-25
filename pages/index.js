@@ -1,34 +1,7 @@
 import { Box, Button, Text, TextField, Image } from '@skynexui/components';
 import appConfig from '../config.json'
-
-function GlobalStyle() {
-    return (
-      <style global jsx>{`
-        * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-          list-style: none;
-        }
-        body {
-          font-family: 'Open Sans', sans-serif;
-        }
-        /* App fit Height */ 
-        html, body, #__next {
-          min-height: 100vh;
-          display: flex;
-          flex: 1;
-        }
-        #__next {
-          flex: 1;
-        }
-        #__next > * {
-          flex: 1;
-        }
-        /* ./App fit Height */ 
-      `}</style>
-    );
-  }
+import React from 'react';
+import {useRouter} from 'next/router'
 
 function Title(props) {
     const Tag = props.tag || 'h1';
@@ -66,16 +39,18 @@ function Title(props) {
 */
 
 export default function PaginaInicial() {
-    const username = 'DouglasMreli';
-  
+    //const username = 'DouglasMreli';
+    const [username, setUsername] = React.useState('');
+    const roteamento = useRouter();
+
     return (
       <>
-        <GlobalStyle />
         <Box
           styleSheet={{
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            backgroundColor: appConfig.theme.colors.primary[500],
-            backgroundImage: 'url(https://virtualbackgrounds.site/wp-content/uploads/2020/08/the-matrix-digital-rain.jpg)',
+            backgroundColor: appConfig.theme.colors.primary[100],
+            // backgroundImage: 'url(https://virtualbackgrounds.site/wp-content/uploads/2020/08/the-matrix-digital-rain.jpg)',
+            backgroundImage: 'url(https://1.bp.blogspot.com/-oPMAj_aKWno/XrtxEOnlpaI/AAAAAAAAvUw/gP7D0tFjBUQ2n3J_q__ar3YUfAPL1WbLACLcBGAsYHQ/s2560/books_library_shelves_138556_3840x2160.jpg)',
             backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundBlendMode: 'multiply',
           }}
         >
@@ -97,6 +72,11 @@ export default function PaginaInicial() {
             {/* Formulário */}
             <Box
               as="form"
+              onSubmit={ function (infosDoEvento) {
+                infosDoEvento.preventDefault();
+                roteamento.push('/chat')
+                // window.location.href = '/chat'
+              }}
               styleSheet={{
                 display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
                 width: { xs: '100%', sm: '50%' }, textAlign: 'center', marginBottom: '32px',
@@ -106,8 +86,29 @@ export default function PaginaInicial() {
               <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals[300] }}>
                 {appConfig.name}
               </Text>
-  
-              <TextField
+              
+              {/*<input 
+                type="text" 
+                value={username}
+                onChange={function haandler(event) {
+                  console.log(event.target.value)
+                  // onde ta o valor?
+                  const valor = event.target.value;
+                  // Trocar o valor da variável
+                  // através do React e avise quem precisa
+                  setUsername(valor);
+                }}
+              />*/}
+              {<TextField
+                value={username}
+                onChange={function haandler(event) {
+                  console.log(event.target.value)
+                  // onde ta o valor?
+                  const valor = event.target.value;
+                  // Trocar o valor da variável
+                  // através do React e avise quem precisa
+                  setUsername(valor);
+                }}
                 fullWidth
                 textFieldColors={{
                   neutral: {
@@ -117,7 +118,7 @@ export default function PaginaInicial() {
                     backgroundColor: appConfig.theme.colors.neutrals[800],
                   },
                 }}
-              />
+              />}
               <Button
                 type='submit'
                 label='Entrar'
