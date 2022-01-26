@@ -114,7 +114,7 @@ export default function PaginaInicial() {
                   neutral: {
                     textColor: appConfig.theme.colors.neutrals[200],
                     mainColor: appConfig.theme.colors.neutrals[900],
-                    mainColorHighlight: appConfig.theme.colors.primary[500],
+                    mainColorHighlight: appConfig.theme.colors.primary[400],
                     backgroundColor: appConfig.theme.colors.neutrals[800],
                   },
                 }}
@@ -155,7 +155,10 @@ export default function PaginaInicial() {
                   borderRadius: '50%',
                   marginBottom: '16px',
                 }}
-                src={`https://github.com/${username}.png`}
+                src={
+                  username.length > 2
+                  ? `https://github.com/${username}.png`
+                  : 'https://static.wixstatic.com/media/fe0a41_27984d1534fa43e69d6b1ff387374831~mv2.gif'}
               />
               <Text
                 variant="body4"
