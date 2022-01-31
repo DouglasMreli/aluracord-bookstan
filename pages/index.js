@@ -74,7 +74,7 @@ export default function PaginaInicial() {
               as="form"
               onSubmit={ function (infosDoEvento) {
                 infosDoEvento.preventDefault();
-                roteamento.push('/chat')
+                roteamento.push(`/chat?username=${username}`) // a crase ` cria um template
                 // window.location.href = '/chat'
               }}
               styleSheet={{
@@ -91,7 +91,7 @@ export default function PaginaInicial() {
                 type="text" 
                 value={username}
                 onChange={function haandler(event) {
-                  console.log(event.target.value)
+                  //console.log(event.target.value)
                   // onde ta o valor?
                   const valor = event.target.value;
                   // Trocar o valor da variável
@@ -102,7 +102,7 @@ export default function PaginaInicial() {
               {<TextField
                 value={username}
                 onChange={function handler(event) {
-                  console.log(event.target.value)
+                  //console.log(event.target.value)
                   // onde ta o valor?
                   const valor = event.target.value;
                   // Trocar o valor da variável
